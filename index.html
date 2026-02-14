@@ -42,7 +42,7 @@
           <a href="#trabajos">Trabajos</a>
           <a href="#faq">FAQ</a>
           <a class="btn btn--small" href="#presupuesto">Pedir presupuesto</a>
-          <button class="chip" id="themeBtn" type="button" aria-label="Cambiar tema">??</button>
+          <button class="chip" id="themeBtn" type="button" aria-label="Cambiar tema" data-icon="moon">🌙</button>
         </div>
       </nav>
     </div>
@@ -179,22 +179,22 @@
 
         <div class="baGrid">
           <figure class="ba" data-pos="55">
-            <img class="ba__img ba__img--before" src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80" alt="Cocina antes de la reforma" loading="lazy" />
-            <img class="ba__img ba__img--after" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80&sat=20&exp=10" alt="Cocina después de la reforma" loading="lazy" />
+            <img class="ba__img ba__img--before" src="assets/before-cocina.jpg" alt="Cocina antes de la reforma" loading="lazy" />
+            <img class="ba__img ba__img--after" src="assets/after-cocina.jpg" alt="Cocina después de la reforma" loading="lazy" />
             <figcaption>Cocina: luz + integración de electrodomésticos.</figcaption>
             <div class="ba__handle" role="slider" aria-label="Comparar cocina" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55" tabindex="0"><span>⇆</span></div>
           </figure>
 
           <figure class="ba" data-pos="48">
-            <img class="ba__img ba__img--before" src="https://images.unsplash.com/photo-1523419400524-219d99fedf26?auto=format&fit=crop&w=1200&q=80" alt="Baño antes de la reforma" loading="lazy" />
-            <img class="ba__img ba__img--after" src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80&sat=18&exp=8" alt="Baño después de la reforma" loading="lazy" />
+            <img class="ba__img ba__img--before" src="assets/before-bano.jpg" alt="Baño antes de la reforma" loading="lazy" />
+            <img class="ba__img ba__img--after" src="assets/after-bano.jpg" alt="Baño después de la reforma" loading="lazy" />
             <figcaption>Baño: plato de ducha, grifería empotrada y luz cálida.</figcaption>
             <div class="ba__handle" role="slider" aria-label="Comparar baño" aria-valuemin="0" aria-valuemax="100" aria-valuenow="48" tabindex="0"><span>⇆</span></div>
           </figure>
 
           <figure class="ba" data-pos="60">
-            <img class="ba__img ba__img--before" src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1200&q=80" alt="Salón antes de la reforma" loading="lazy" />
-            <img class="ba__img ba__img--after" src="https://images.unsplash.com/photo-1484156818044-c040038b0710?auto=format&fit=crop&w=1200&q=80&sat=18&exp=6" alt="Salón después de la reforma" loading="lazy" />
+            <img class="ba__img ba__img--before" src="assets/before-salon.jpg" alt="Salón antes de la reforma" loading="lazy" />
+            <img class="ba__img ba__img--after" src="assets/after-salon.jpg" alt="Salón después de la reforma" loading="lazy" />
             <figcaption>Salón: suelos, pintura y iluminación por capas.</figcaption>
             <div class="ba__handle" role="slider" aria-label="Comparar salón" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" tabindex="0"><span>⇆</span></div>
           </figure>
@@ -267,7 +267,7 @@
         </div>
 
         <!-- Formspree: reemplaza ACTION con tu endpoint -->
-        <form class="form" id="leadForm" action="https://formspree.io/f/XXXXYYYY" method="POST">
+        <form class="form" id="leadForm" action="#" method="POST">
           <div class="form__row">
             <label>
               Nombre
@@ -330,12 +330,11 @@
           <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" />
 
           <div class="form__actions">
-            <button class="btn" type="submit">Enviar</button>
-            <button class="btn btn--ghost" type="button" id="waFromForm">Enviar por WhatsApp</button>
+            <button class="btn" type="button" id="waFromForm">Enviar por WhatsApp</button>
             <p class="fineprint">Al enviar aceptas que te contactemos por teléfono/WhatsApp para tu presupuesto.</p>
           </div>
 
-          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+          <div class="toast" id="toast" role="status" aria-live="polite" style="display:none;"></div>
         </form>
       </div>
     </section>

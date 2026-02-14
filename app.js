@@ -24,17 +24,23 @@
   });
 
   // Theme (persist)
-  const themeBtn = $("#themeBtn");
-  const setTheme = (t) => {
-    document.documentElement.dataset.theme = t;
-    localStorage.setItem("theme", t);
-  };
-  const saved = localStorage.getItem("theme");
-  if (saved) setTheme(saved);
-  themeBtn?.addEventListener("click", () => {
-    const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
-    setTheme(current === "light" ? "dark" : "light");
-  });
+  const themeBtn = $("#themeBtn");
+  const setTheme = (t) => {
+    document.documentElement.dataset.theme = t;
+    localStorage.setItem("theme", t);
+    if (themeBtn) {
+      const isLight = t === "light";
+      themeBtn.textContent = isLight ? "☀️" : "🌙";
+      themeBtn.setAttribute("data-icon", isLight ? "sun" : "moon");
+      themeBtn.setAttribute("aria-label", isLight ? "Tema claro" : "Tema oscuro");
+    }
+  };
+  const saved = localStorage.getItem("theme");
+  if (saved) setTheme(saved);
+  themeBtn?.addEventListener("click", () => {
+    const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+    setTheme(current === "light" ? "dark" : "light");
+  });
 
   // Pills: fill "Tipo de reforma"
   document.addEventListener("click", (e) => {
@@ -157,34 +163,5 @@
     toast.textContent = msg;
   };
 
-  const form = $("#leadForm");
-  form?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    // Honeypot
-    const hp = form.querySelector("input[name='_gotcha']");
-    if (hp && hp.value) return;
-
-    const action = form.getAttribute("action");
-    if (!action || action.includes("XXXXYYYY")) {
-      showToast("Falta configurar Formspree (action). Mientras tanto usa WhatsApp.", false);
-      return;
-    }
-
-    try {
-      const res = await fetch(action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { "Accept": "application/json" }
-      });
-      if (res.ok) {
-        form.reset();
-        showToast("Listo. Recibimos tu solicitud. Te contactamos hoy ?", true);
-      } else {
-        showToast("No se pudo enviar. Prueba por WhatsApp.", false);
-      }
-    } catch {
-      showToast("Error de conexión. Prueba por WhatsApp.", false);
-    }
-  });
+  // Quitamos envío por email; solo WhatsApp
 })();
