@@ -275,6 +275,14 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
   cursor:pointer;
 }
 .lightbox__inner img{width:100%; height:auto; display:block}
+.watermark{
+  position:absolute;
+  right:12px; bottom:12px;
+  color:rgba(255,255,255,0.65);
+  font-size:.9rem;
+  text-shadow:0 1px 3px rgba(0,0,0,.6);
+  pointer-events:none;
+}
 
 /* FAQ */
 .faq details{
