@@ -208,7 +208,6 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
   border-radius:16px;
   overflow:hidden;
   background:var(--panel);
-  --pos:50;
   aspect-ratio: 4 / 5;
   width:min(320px, 100%);
   user-select:none;
@@ -220,22 +219,16 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
   height:100%;
   object-fit:cover;
   display:block;
+  transition:opacity .6s ease;
 }
-.ba__img--after{clip-path: inset(0 calc(100% - var(--pos)%) 0 0);}
+.ba__img--after{
+  opacity: var(--after, 0);
+}
+.ba[data-state="after"]{
+  --after:1;
+}
 .ba__handle{
-  position:absolute;
-  top:0; bottom:0;
-  left:calc(var(--pos)*1% - 16px);
-  width:32px;
-  display:grid; place-items:center;
-  background:color-mix(in srgb, var(--panel) 70%, transparent);
-  border-left:1px solid var(--line);
-  border-right:1px solid var(--line);
-  color:var(--text);
-  font-weight:900;
-  cursor:ew-resize;
-  outline:none;
-  touch-action:none;
+  display:none;
 }
 .ba__controls{
   position:absolute;

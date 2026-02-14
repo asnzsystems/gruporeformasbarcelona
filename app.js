@@ -87,58 +87,31 @@
   // Before/after sliders
   const initComparators = () => {
     document.querySelectorAll(".ba").forEach((ba) => {
-      let pos = Number(ba.dataset.pos) || 50;
-      const handle = ba.querySelector(".ba__handle");
-      const setPos = (p) => {
-        pos = Math.min(100, Math.max(0, p));
-        ba.style.setProperty("--pos", pos);
-        handle?.setAttribute("aria-valuenow", String(Math.round(pos)));
+      let state = ba.dataset.state === "after" ? "after" : "before";
+      const setState = (s) => {
+        state = s === "after" ? "after" : "before";
+        ba.dataset.state = state;
       };
-      setPos(pos);
+      setState(state);
 
-      const rect = () => ba.getBoundingClientRect();
-      const move = (clientX) => {
-        const r = rect();
-        const pct = ((clientX - r.left) / r.width) * 100;
-        setPos(pct);
-      };
-
-      const onPointer = (e) => {
-        e.preventDefault();
-        handle?.setPointerCapture?.(e.pointerId);
-        move(e.clientX);
-        const onMove = (ev) => move(ev.clientX);
-        const onUp = () => {
-          window.removeEventListener("pointermove", onMove);
-          window.removeEventListener("pointerup", onUp);
-        };
-        window.addEventListener("pointermove", onMove);
-        window.addEventListener("pointerup", onUp);
+      // auto-fade cada 3s
+      let timer = setInterval(() => setState(state === "after" ? "before" : "after"), 3000);
+      const restart = (target) => {
+        clearInterval(timer);
+        setState(target);
+        timer = setInterval(() => setState(state === "after" ? "before" : "after"), 3000);
       };
 
-      handle?.addEventListener("pointerdown", onPointer);
-      ba.addEventListener("pointerdown", (e) => {
-        if (e.target.closest(".ba__controls")) return;
-        onPointer(e);
-      });
-
-      handle?.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") { setPos(pos - 5); }
-        if (e.key === "ArrowRight") { setPos(pos + 5); }
-      });
-
-      // Toggle on click (tap) for quienes no usan drag
       ba.addEventListener("click", (e) => {
-        if (e.target.closest(".ba__btn")) return; // botones ya controlan
-        setPos(pos < 50 ? 100 : 0);
+        if (e.target.closest(".ba__btn")) return;
+        restart(state === "after" ? "before" : "after");
       });
 
-      // Botones Antes / Después
       ba.querySelectorAll(".ba__btn").forEach((btn) => {
         btn.addEventListener("click", (ev) => {
           ev.stopPropagation();
-          const targetPos = Number(btn.dataset.pos) || 0;
-          setPos(targetPos);
+          const target = btn.dataset.pos === "100" ? "after" : "before";
+          restart(target);
         });
       });
     });
