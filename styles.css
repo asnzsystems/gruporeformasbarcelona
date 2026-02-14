@@ -196,7 +196,12 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
 .thumb img{aspect-ratio: 4/3; object-fit:cover; transition:transform .2s;}
 .thumb:hover img{transform:scale(1.03);}
 
-.baGrid{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+.baGrid{
+  display:grid;
+  gap:1rem;
+  grid-template-columns:repeat(auto-fit,minmax(260px, 1fr));
+  justify-items:center;
+}
 .ba{
   position:relative;
   border:1px solid var(--line);
@@ -205,8 +210,7 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
   background:var(--panel);
   --pos:50;
   aspect-ratio: 4 / 5;
-  max-width: 360px;
-  margin-inline: auto;
+  width:min(320px, 100%);
 }
 .ba__img{
   position:absolute;
@@ -234,14 +238,12 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
 }
 .ba__handle:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 50%, transparent);}
 .ba figcaption{
-  position:absolute;
-  left:12px; bottom:12px;
+  position:absolute; left:12px; right:12px; bottom:12px;
   background: color-mix(in srgb, var(--panel) 80%, transparent);
   border:1px solid var(--line);
   padding:.4rem .6rem;
   border-radius:10px;
   color:var(--text);
-  max-width:80%;
 }
 .note{margin-top:.6rem;}
 
