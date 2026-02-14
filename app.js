@@ -67,6 +67,7 @@
   const lightboxImg = $("#lightboxImg");
   let lbState = "before";
   let lbTimer = null;
+  const stopLb = () => { if (lbTimer) { clearInterval(lbTimer); lbTimer = null; } };
   const setLbState = (src, alt, state) => {
     if (!src) return;
     lbState = state || "before";
@@ -75,7 +76,7 @@
     lightboxImg.alt = alt || "";
   };
   const cycleLb = (before, after, altBase) => {
-    clearInterval(lbTimer);
+    stopLb();
     let showAfter = false;
     const tick = () => {
       if (showAfter && after) {
@@ -149,12 +150,36 @@
     });
   };
   initComparators();
-
-  // WhatsApp builder
-  const buildWhatsAppUrl = (text) => {
-    const msg = encodeURIComponent(text);
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
-  };
+
+  // Lightbox close
+  lightboxClose?.addEventListener("click", () => {
+    stopLb();
+    lightbox.setAttribute("aria-hidden", "true");
+  });
+  lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      stopLb();
+      lightbox.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  // Galería (trabajos): abre imagen única sin loop
+  $("#gallery")?.addEventListener("click", (e) => {
+    const btn = e.target.closest(".thumb");
+    if (!btn) return;
+    e.preventDefault();
+    stopLb();
+    const full = btn.getAttribute("data-full") || btn.querySelector("img")?.src;
+    const alt = btn.querySelector("img")?.alt || "Imagen ampliada";
+    setLbState(full, alt, "before");
+    lightbox.setAttribute("aria-hidden", "false");
+  });
+
+  // WhatsApp builder
+  const buildWhatsAppUrl = (text) => {
+    const msg = encodeURIComponent(text);
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+  };
 
   const quickMsg = `${SITE_NAME}: Hola, quiero pedir presupuesto. Zona: ___ | Tipo: ___ | Presupuesto: ___ | Urgencia: ___`;
   const waLinks = ["#waTop", "#waSticky"].map(id => $(id)).filter(Boolean);
