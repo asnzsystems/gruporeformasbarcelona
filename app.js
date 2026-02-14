@@ -63,8 +63,31 @@
   });
 
   // Lightbox gallery
-  const lightbox = $("#lightbox");
-  const lightboxImg = $("#lightboxImg");
+  const lightbox = $("#lightbox");
+  const lightboxImg = $("#lightboxImg");
+  let lbState = "before";
+  let lbTimer = null;
+  const setLbState = (src, alt, state) => {
+    if (!src) return;
+    lbState = state || "before";
+    lightboxImg.dataset.state = lbState;
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || "";
+  };
+  const cycleLb = (before, after, altBase) => {
+    clearInterval(lbTimer);
+    let showAfter = false;
+    const tick = () => {
+      if (showAfter && after) {
+        setLbState(after.src, after.alt || altBase, "after");
+      } else if (before) {
+        setLbState(before.src, before.alt || altBase, "before");
+      }
+      showAfter = !showAfter;
+    };
+    tick();
+    lbTimer = setInterval(tick, 2000);
+  };
   const lightboxClose = $("#lightboxClose");
   $("#gallery")?.addEventListener("click", (e) => {
     const btn = e.target.closest(".thumb");
@@ -111,11 +134,9 @@
 
       // Lightbox al hacer doble click o click sostenido
       ba.addEventListener("dblclick", () => {
-        const img = state === "after" ? afterImg : beforeImg;
-        if (!img) return;
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt || "Imagen ampliada";
+        if (!beforeImg || !afterImg) return;
         lightbox.setAttribute("aria-hidden", "false");
+        cycleLb(beforeImg, afterImg, beforeImg.alt || "Imagen ampliada");
       });
 
       ba.querySelectorAll(".ba__btn").forEach((btn) => {
