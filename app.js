@@ -87,6 +87,8 @@
   // Before/after sliders
   const initComparators = () => {
     document.querySelectorAll(".ba").forEach((ba) => {
+      const beforeImg = ba.querySelector(".ba__img--before");
+      const afterImg  = ba.querySelector(".ba__img--after");
       let state = ba.dataset.state === "after" ? "after" : "before";
       const setState = (s) => {
         state = s === "after" ? "after" : "before";
@@ -105,6 +107,15 @@
       ba.addEventListener("click", (e) => {
         if (e.target.closest(".ba__btn")) return;
         restart(state === "after" ? "before" : "after");
+      });
+
+      // Lightbox al hacer doble click o click sostenido
+      ba.addEventListener("dblclick", () => {
+        const img = state === "after" ? afterImg : beforeImg;
+        if (!img) return;
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || "Imagen ampliada";
+        lightbox.setAttribute("aria-hidden", "false");
       });
 
       ba.querySelectorAll(".ba__btn").forEach((btn) => {
