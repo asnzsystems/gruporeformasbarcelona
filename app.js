@@ -105,6 +105,7 @@
 
       const onPointer = (e) => {
         e.preventDefault();
+        handle?.setPointerCapture?.(e.pointerId);
         move(e.clientX);
         const onMove = (ev) => move(ev.clientX);
         const onUp = () => {
@@ -116,7 +117,10 @@
       };
 
       handle?.addEventListener("pointerdown", onPointer);
-      ba.addEventListener("pointerdown", onPointer);
+      ba.addEventListener("pointerdown", (e) => {
+        if (e.target.closest(".ba__controls")) return;
+        onPointer(e);
+      });
 
       handle?.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") { setPos(pos - 5); }
