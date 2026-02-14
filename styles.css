@@ -329,9 +329,14 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
 
 /* Footer */
 .footer{padding:1.6rem 0 5rem;}
-.footer__grid{display:grid; gap:1rem; grid-template-columns: 1fr auto auto; align-items:start;}
-.footer__links{display:flex; gap:1rem; flex-wrap:wrap; justify-content:flex-end}
-.footer__small{justify-self:end}
+.footer__grid{
+  display:grid;
+  gap:1rem;
+  grid-template-columns: 1fr;
+  justify-items:center;
+  text-align:center;
+}
+.footer__small{justify-self:center}
 
 /* Sticky CTA */
 .sticky{
