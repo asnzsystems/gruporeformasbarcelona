@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 64 64" role="img" aria-label="GRB icon">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#7dd3fc" offset="0%"/>
+      <stop stop-color="#a78bfa" offset="100%"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#g)"/>
+  <text x="32" y="39" font-family="Inter, 'Segoe UI', sans-serif" font-size="22" font-weight="800" fill="#0b1020" text-anchor="middle">GRB</text>
+</svg>
