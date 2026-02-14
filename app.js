@@ -122,6 +122,21 @@
         if (e.key === "ArrowLeft") { setPos(pos - 5); }
         if (e.key === "ArrowRight") { setPos(pos + 5); }
       });
+
+      // Toggle on click (tap) for quienes no usan drag
+      ba.addEventListener("click", (e) => {
+        if (e.target.closest(".ba__btn")) return; // botones ya controlan
+        setPos(pos < 50 ? 100 : 0);
+      });
+
+      // Botones Antes / Después
+      ba.querySelectorAll(".ba__btn").forEach((btn) => {
+        btn.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          const targetPos = Number(btn.dataset.pos) || 0;
+          setPos(targetPos);
+        });
+      });
     });
   };
   initComparators();
