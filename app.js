@@ -205,7 +205,7 @@
   if (shareSiteBtn) {
     const shareUrl = "https://www.gruporeformasbarcelona.com/";
     const shareText = "Grupo Reformas Barcelona · Reformas integrales, baños y cocinas. Presupuesto en 24h.";
-    const shareImg = "https://www.gruporeformasbarcelona.com/assets/favicon.png";
+    const shareImg = "https://www.gruporeformasbarcelona.com/assets/trabajos/02-2026/work-cocina-share.jpg";
     shareSiteBtn.addEventListener("click", async () => {
       const fallbackMsg = `${shareText}\n${shareUrl}\n${shareImg}`;
       if (navigator.share) {
