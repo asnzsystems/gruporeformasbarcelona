@@ -298,6 +298,9 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
   pointer-events:none;
 }
 
+/* Oculta cualquier botón legacy de compartir trabajos si quedara en caché */
+#shareWorks{display:none !important;}
+
 /* FAQ */
 .faq details{
   background:var(--panel);
