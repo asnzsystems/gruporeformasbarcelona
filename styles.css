@@ -395,4 +395,17 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
   .nav__menu.is-open{display:flex;}
   .nav__menu a{padding:.45rem .4rem}
   .form__row{grid-template-columns:1fr}
+
+  .badge{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    text-align:center;
+    gap:.35rem;
+    font-size:.95rem;
+  }
+
+  .sticky{
+    display:none;
+  }
 }
