@@ -181,9 +181,9 @@
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
   };
 
-  const quickMsg = `${SITE_NAME}: Hola, quiero pedir presupuesto. Zona: ___ | Tipo: ___ | Presupuesto: ___ | Urgencia: ___`;
-  const waLinks = ["#waTop", "#waSticky"].map(id => $(id)).filter(Boolean);
-  waLinks.forEach(a => a.setAttribute("href", buildWhatsAppUrl(quickMsg)));
+  const quickMsg = `${SITE_NAME}: Hola, quiero pedir presupuesto. Zona: ___ | Tipo: ___ | Presupuesto: ___ | Urgencia: ___`;
+  const waLinks = ["#waSticky"].map(id => $(id)).filter(Boolean);
+  waLinks.forEach(a => a.setAttribute("href", buildWhatsAppUrl(quickMsg)));
 
   // WhatsApp from form
   const waFromForm = $("#waFromForm");
