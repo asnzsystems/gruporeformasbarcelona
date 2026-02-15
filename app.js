@@ -175,6 +175,17 @@
     lightbox.setAttribute("aria-hidden", "false");
   });
 
+  // Ordenar galería por mes (YYYY-MM) descendente usando data-month
+  const orderGallery = () => {
+    document.querySelectorAll(".gallery .thumb[data-month]").forEach((btn) => {
+      const val = btn.dataset.month;
+      if (!val) return;
+      const key = Number(val.replace("-", ""));
+      if (!Number.isNaN(key)) btn.style.order = -key;
+    });
+  };
+  orderGallery();
+
   // WhatsApp builder
   const buildWhatsAppUrl = (text) => {
     const msg = encodeURIComponent(text);
