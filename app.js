@@ -220,6 +220,31 @@
   const quickMsg = `${SITE_NAME}: Hola, quiero pedir presupuesto. Zona: ___ | Tipo: ___ | Presupuesto: ___ | Urgencia: ___`;
   const waLinks = ["#waSticky"].map(id => $(id)).filter(Boolean);
   waLinks.forEach(a => a.setAttribute("href", buildWhatsAppUrl(quickMsg)));
+
+  // Share whole site
+  const shareSiteBtn = $("#shareSite");
+  if (shareSiteBtn) {
+    const shareUrl = "https://www.gruporeformasbarcelona.com/";
+    const shareText = "Grupo Reformas Barcelona · Reformas integrales, baños y cocinas. Presupuesto en 24h.";
+    const shareImg = "https://www.gruporeformasbarcelona.com/assets/trabajos/02-2026/work-cocina.jpg";
+    shareSiteBtn.addEventListener("click", async () => {
+      const fallbackMsg = `${shareText}\n${shareUrl}\n${shareImg}`;
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "Grupo Reformas Barcelona",
+            text: shareText,
+            url: shareUrl
+          });
+        } catch (err) {
+          if (err?.name !== "AbortError") console.error("Share failed", err);
+        }
+      } else {
+        const wa = `https://wa.me/?text=${encodeURIComponent(fallbackMsg)}`;
+        window.open(wa, "_blank", "noopener");
+      }
+    });
+  }
 
   // WhatsApp from form
   const waFromForm = $("#waFromForm");
