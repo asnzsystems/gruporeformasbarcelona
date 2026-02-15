@@ -101,9 +101,9 @@ ul{margin:0; padding-left:1.1rem}
 }
 .btn:hover{transform: translateY(-1px)}
 .btn--ghost{
-  background:transparent;
-  border:1px solid var(--line);
-  box-shadow:none;
+  background: color-mix(in srgb, var(--accent) 20%, var(--panel));
+  border:1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  box-shadow: var(--shadow-sm);
 }
 .btn--small{padding:.55rem .8rem; border-radius:12px; box-shadow:none;}
 
@@ -155,12 +155,6 @@ h1{font-size:clamp(2rem, 4vw, 3rem); line-height:1.1; margin:.9rem 0;}
 .section__head{display:grid; gap:.4rem; margin-bottom:1.2rem;}
 .section__head h2{margin:0; font-size:1.6rem}
 .section__head p{margin:0; color:var(--muted); max-width:70ch}
-.section__subhead{
-  display:flex;
-  gap:.75rem;
-  align-items:center;
-  flex-wrap:wrap;
-}
 
 .cards{display:grid; gap:1rem; grid-template-columns: repeat(3, 1fr);}
 .card{
