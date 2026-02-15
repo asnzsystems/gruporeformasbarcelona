@@ -186,6 +186,31 @@
   };
   orderGallery();
 
+  // Compartir últimos trabajos
+  const shareBtn = document.getElementById("shareWorks");
+  if (shareBtn) {
+    const shareUrl = "https://www.gruporeformasbarcelona.com/";
+    const shareImg = "https://www.gruporeformasbarcelona.com/assets/trabajos/02-2026/work-cocina.jpg";
+    const shareText = "Mira nuestros últimos trabajos de reformas en Barcelona.";
+    shareBtn.addEventListener("click", async () => {
+      const msg = `${shareText}\n${shareUrl}\n${shareImg}`;
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "Trabajos recientes · Grupo Reformas Barcelona",
+            text: shareText,
+            url: shareUrl
+          });
+        } catch (err) {
+          if (err?.name !== "AbortError") console.error("Share failed", err);
+        }
+      } else {
+        const wa = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+        window.open(wa, "_blank", "noopener");
+      }
+    });
+  }
+
   // WhatsApp builder
   const buildWhatsAppUrl = (text) => {
     const msg = encodeURIComponent(text);
